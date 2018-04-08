@@ -35,14 +35,14 @@
 </head>
 
 <body>
-    
+
 
     <div class="container">
-            <h1>
-                    Full Text Address Search
-                </h1>
+        <h1>
+            Full Text Address Search
+        </h1>
         <div class="row">
-            
+
             <div class="col-sm">
                 <label for="basic-url">ที่อยู่</label>
                 <div class="input-group">
@@ -63,14 +63,34 @@
             var render = document.getElementById('jsonRender')
             render.innerHTML = ""
 
-            fullTextSearchAddress(text,{
-                zipFilter:true,
-                limit:10
+            fullTextSearchAddress(text, {
+                zipFilter: true,
+                limit: 10
             }).then(data => {
                 console.log(data)
+
                 output(syntaxHighlight(JSON.stringify(data, undefined, 4)))
+
+                console.log(splitAddress(text, data[0]))
             })
         }
+
+        function splitAddress(text, dataObj) {
+            let address = []
+            let textArr = text.split(dataObj.item.district)
+            let regexp = /\ ต.| ตำบล| แขวง/
+            if (textArr.lenght > 2) {
+                textArr.forEach(element => {
+                    let res = element.split(regexp, 1)
+                    address.push(res)
+                })
+            } else {
+                let res = textArr[0].split(regexp, 1)
+                address.push(res)
+            }
+            return address
+        }
+
 
         // ---------------------- highlight json --------------------------
         function output(json) {
