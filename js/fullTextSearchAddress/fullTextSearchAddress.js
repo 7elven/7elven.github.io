@@ -26,10 +26,10 @@ function fullTextSearchAddress(text, options = {}, searchOptions = null) {
                     maxPatternLength: 100,
                     minMatchCharLength: 1,
                     keys: [
+                        "zipcode",
                         "district",
                         "amphoe",
-                        "province",
-                        "zipcode"
+                        "province"
                     ]
                 }
                 if (searchOptions !== null && typeof searchOptions === 'object') {
@@ -37,7 +37,6 @@ function fullTextSearchAddress(text, options = {}, searchOptions = null) {
                 }
                 let fuse = new Fuse(result, fuseOptions)
                 let search = fuse.search(textSearch)
-
                 if (options.limit) {
                     let limitSearch = limitResult(search, options.limit)
                     resolve(limitSearch)
@@ -49,7 +48,8 @@ function fullTextSearchAddress(text, options = {}, searchOptions = null) {
 
 function limitResult(dataArr, limit = 30) {
     let result = []
-    for (let i = 0; i < limit; i++) {
+    let length = (limit<dataArr.length)?limit:dataArr.length
+    for (let i = 0; i < length; i++) {
         result.push(dataArr[i])
     }
     return result

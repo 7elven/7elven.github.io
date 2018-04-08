@@ -62,8 +62,11 @@
         function search(text) {
             var render = document.getElementById('jsonRender')
             render.innerHTML = ""
-            
-            fullTextSearchAddress(text).then(data => {
+
+            fullTextSearchAddress(text,{
+                zipFilter:true,
+                limit:10
+            }).then(data => {
                 console.log(data)
                 output(syntaxHighlight(JSON.stringify(data, undefined, 4)))
             })
