@@ -1,6 +1,6 @@
 function fullTextSearchAddress(text, options = {}, searchOptions = null) {
     // default setting
-    let defaultDatabaseUrl = "./raw_database.json"
+    let defaultDatabaseUrl = "https://7elven.github.io/js/fullTextSearchAddress/raw_database.json"
     let textSearch = text
     let dbUrl = options.url || defaultDatabaseUrl
     let zipFilter = options.zipFilter || false
