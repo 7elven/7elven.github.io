@@ -13,7 +13,7 @@ function fullTextSearchAddress(text, options = {}, searchOptions = null) {
             .then(function (result) {
                 if (zipFilter) {
                     let regxpZip = textSearch.match(/\d{5}/)
-                    if(regxpZip[0]){
+                    if(regxpZip){
                         result = filterByZip(result, parseInt(regxpZip[0]))
                     }
                 }
