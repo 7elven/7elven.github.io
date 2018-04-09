@@ -48,7 +48,7 @@ function fullTextSearchAddress(text, options = {}, searchOptions = null) {
 
 function limitResult(dataArr, limit = 30) {
     let result = []
-    let length = (limit<dataArr.length)?limit:dataArr.length
+    let length = (limit < dataArr.length) ? limit : dataArr.length
     for (let i = 0; i < length; i++) {
         result.push(dataArr[i])
     }
@@ -59,5 +59,9 @@ function filterByZip(dataArr, zipcode) {
     let result = dataArr.filter(function (data) {
         return data.zipcode === zipcode
     })
-    return result
+    if (result) {
+        return result
+    } else {
+        return dataArr
+    }
 }
