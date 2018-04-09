@@ -59,7 +59,8 @@ function filterByZip(dataArr, zipcode) {
     let result = dataArr.filter(function (data) {
         return data.zipcode === zipcode
     })
-    if (result) {
+    console.log(result)
+    if (result != null) {
         return result
     } else {
         return dataArr
