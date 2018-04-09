@@ -44,10 +44,33 @@
         <div class="row">
 
             <div class="col-sm">
-                <label for="basic-url">ที่อยู่</label>
+                <label>ที่อยู่</label>
                 <div class="input-group">
                     <textarea onchange="search(this.value)" class="form-control" aria-label="With textarea"></textarea>
                 </div>
+                <br />
+                <h2>แยกได้ดังนี้</h2>
+                <div class="form-group">
+                    <label>ที่อยู่</label>
+                    <input type="text" class="form-control" id="form-address">
+                </div>
+                <div class="form-group">
+                    <label>ตำบล</label>
+                    <input type="text" class="form-control" id="form-district">
+                </div>
+                <div class="form-group">
+                    <label>อำเภอ</label>
+                    <input type="text" class="form-control" id="form-amphor">
+                </div>
+                <div class="form-group">
+                    <label>จังหวัด</label>
+                    <input type="text" class="form-control" id="form-province">
+                </div>
+                <div class="form-group">
+                    <label>รหัสไปรษณี</label>
+                    <input type="text" class="form-control" id="form-zipcode">
+                </div>
+
             </div>
             <div class="col-sm">
                 <label for="basic-url">ผลลัพท์</label>
@@ -71,7 +94,13 @@
 
                 output(syntaxHighlight(JSON.stringify(data, undefined, 4)))
 
+                // สมมติว่า array แรกถูกต้อง
                 console.log(splitAddress(text, data[0]))
+                document.getElementById('form-address').value = splitAddress(text, data[0])[0]
+                document.getElementById('form-district').value = data[0].item.district
+                document.getElementById('form-amphor').value = data[0].item.amphoe
+                document.getElementById('form-province').value = data[0].item.province
+                document.getElementById('form-zipcode').value = data[0].item.zipcode
             })
         }
 
