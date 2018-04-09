@@ -13,7 +13,9 @@ function fullTextSearchAddress(text, options = {}, searchOptions = null) {
             .then(function (result) {
                 if (zipFilter) {
                     let regxpZip = textSearch.match(/\d{5}/)
-                    result = filterByZip(result, parseInt(regxpZip[0]))
+                    if(regxpZip[0]){
+                        result = filterByZip(result, parseInt(regxpZip[0]))
+                    }
                 }
                 let fuseOptions = {
                     caseSensitive: true,
@@ -59,10 +61,5 @@ function filterByZip(dataArr, zipcode) {
     let result = dataArr.filter(function (data) {
         return data.zipcode === zipcode
     })
-    console.log(result)
-    if (result != null) {
-        return result
-    } else {
-        return dataArr
-    }
+    return result
 }
